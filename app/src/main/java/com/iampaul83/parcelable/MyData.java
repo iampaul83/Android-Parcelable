@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by iampaul83 on 4/14/15.
@@ -16,11 +17,12 @@ public class MyData implements Parcelable {
     private int age;
     private ArrayList<SubData> subDatas;
 
-    public MyData(String firstName, String lastName, int age, ArrayList<SubData> subDatas) {
+    public MyData(String firstName, String lastName, int age, SubData... subDatas) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.subDatas = subDatas;
+        this.subDatas = new ArrayList<>();
+        Collections.addAll(this.subDatas, subDatas);
     }
 
     public String getName() {
