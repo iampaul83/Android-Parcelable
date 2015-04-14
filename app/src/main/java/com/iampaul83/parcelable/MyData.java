@@ -15,13 +15,12 @@ public class MyData implements Parcelable {
     private String firstName;
     private String lastName;
     private int age;
-    private ArrayList<SubData> subDatas;
+    private ArrayList<SubData> subDatas = new ArrayList<>();
 
     public MyData(String firstName, String lastName, int age, SubData... subDatas) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.subDatas = new ArrayList<>();
         Collections.addAll(this.subDatas, subDatas);
     }
 
@@ -57,7 +56,7 @@ public class MyData implements Parcelable {
         firstName = source.readString();
         lastName = source.readString();
         age = source.readInt();
-        source.readList(subDatas, null);
+        source.readList(subDatas, SubData.class.getClassLoader());
     }
 
     @Override
