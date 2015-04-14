@@ -59,7 +59,8 @@ public class MyData implements Parcelable {
         firstName = source.readString();
         lastName = source.readString();
         age = source.readInt();
-        source.readList(subDatas, SubData.class.getClassLoader());
+            //source.readList(subDatas, SubData.class.getClassLoader());
+        source.readTypedList(subDatas, SubData.CREATOR);
     }
 
     /**
@@ -72,8 +73,9 @@ public class MyData implements Parcelable {
         destination.writeString(firstName);
         destination.writeString(lastName);
         destination.writeInt(age);
-        // Object in the list must implement either `Serializable` or `Parcelable`
-        destination.writeList(subDatas);
+            // Object in the list must implement either `Serializable` or `Parcelable`
+            //destination.writeList(subDatas);
+        destination.writeTypedList(subDatas);
     }
 
     @Override
