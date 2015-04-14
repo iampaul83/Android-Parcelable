@@ -1406,10 +1406,11 @@ containing a value of this type.
         public static final int abc_search_view=0x7f040014;
         public static final int abc_simple_dropdown_hint=0x7f040015;
         public static final int activity_main=0x7f040016;
-        public static final int support_simple_spinner_dropdown_item=0x7f040017;
+        public static final int activity_second=0x7f040017;
+        public static final int support_simple_spinner_dropdown_item=0x7f040018;
     }
     public static final class menu {
-        public static final int menu_main=0x7f0d0000;
+        public static final int delete_me=0x7f0d0000;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -1433,7 +1434,9 @@ containing a value of this type.
         public static final int abc_toolbar_collapse_description=0x7f0b000f;
         public static final int action_settings=0x7f0b0010;
         public static final int app_name=0x7f0b0011;
-        public static final int hello_world=0x7f0b0012;
+        public static final int button_go=0x7f0b0012;
+        public static final int hello_world=0x7f0b0013;
+        public static final int title_activity_second=0x7f0b0014;
     }
     public static final class style {
         public static final int Animation_AppCompat_DropDownUp=0x7f0c0000;
