@@ -23,6 +23,23 @@ public class MyData implements Parcelable {
         this.subDatas = subDatas;
     }
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public ArrayList<SubData> getSubDatas() {
+        return subDatas;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + "(" + age + ")\n" + subDatas.toString();
+    }
+
     public static final Creator<MyData> CREATOR = new Creator<MyData>() {
         @Override
         public MyData createFromParcel(Parcel source) {
