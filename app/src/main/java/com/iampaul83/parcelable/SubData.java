@@ -34,7 +34,7 @@ public class SubData implements Parcelable {
         @Override public SubData[] newArray(int size) { return new SubData[size]; }
     };
 
-    public SubData(Parcel source) {
+    private SubData(Parcel source) {
         type = source.readString();
         value = source.readString();
     }

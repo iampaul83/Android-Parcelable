@@ -55,7 +55,7 @@ public class MyData implements Parcelable {
     /**
      * Constructs a new instance of MyData using {@link Parcel} object.
      */
-    public MyData(Parcel source) {
+    private MyData(Parcel source) {
         firstName = source.readString();
         lastName = source.readString();
         age = source.readInt();
