@@ -71,6 +71,7 @@ public class MyData implements Parcelable {
     public void writeToParcel(Parcel destination, int flags) {
         destination.writeString(firstName);
         destination.writeString(lastName);
+        destination.writeInt(age);
         // Object in the list must implement either `Serializable` or `Parcelable`
         destination.writeList(subDatas);
     }
