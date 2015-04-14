@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 /**
  * Created by iampaul83 on 4/14/15.
- * Hi
+ * @see <a href="https://github.com/iampaul83/Android-Parcelable">GitHub</a>
  */
 public class SubData implements Parcelable {
     private String type;
@@ -30,14 +30,8 @@ public class SubData implements Parcelable {
     }
 
     public static final Creator<SubData> CREATOR = new Creator<SubData>() {
-        @Override
-        public SubData createFromParcel(Parcel source) {
-            return new SubData(source);
-        }
-        @Override
-        public SubData[] newArray(int size) {
-            return new SubData[size];
-        }
+        @Override public SubData createFromParcel(Parcel source) { return new SubData(source); }
+        @Override public SubData[] newArray(int size) { return new SubData[size]; }
     };
 
     public SubData(Parcel source) {

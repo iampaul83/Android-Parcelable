@@ -8,7 +8,7 @@ import java.util.Collections;
 
 /**
  * Created by iampaul83 on 4/14/15.
- * Hi
+ * @see <a href="https://github.com/iampaul83/Android-Parcelable">GitHub</a>
  */
 public class MyData implements Parcelable {
 
@@ -17,6 +17,9 @@ public class MyData implements Parcelable {
     private int age;
     private ArrayList<SubData> subDatas = new ArrayList<>();
 
+    /**
+     * Constructs a new instance of MyData.
+     */
     public MyData(String firstName, String lastName, int age, SubData... subDatas) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,17 +44,17 @@ public class MyData implements Parcelable {
         return getName() + "(" + age + ")\n" + subDatas.toString();
     }
 
+    /**
+     * To CREATE {@link MyData} from {@link Parcel}
+     */
     public static final Creator<MyData> CREATOR = new Creator<MyData>() {
-        @Override
-        public MyData createFromParcel(Parcel source) {
-            return new MyData(source);
-        }
-        @Override
-        public MyData[] newArray(int size) {
-            return new MyData[size];
-        }
+        @Override public MyData createFromParcel(Parcel source) { return new MyData(source); }
+        @Override public MyData[] newArray(int size) { return new MyData[size]; }
     };
 
+    /**
+     * Constructs a new instance of MyData using {@link Parcel} object.
+     */
     public MyData(Parcel source) {
         firstName = source.readString();
         lastName = source.readString();
@@ -59,17 +62,22 @@ public class MyData implements Parcelable {
         source.readList(subDatas, SubData.class.getClassLoader());
     }
 
+    /**
+     * Write values to output {@link Parcel}<br>
+     * - Note that the order of writing and reading matters.<br>
+     * - Object in the list must implement either `Serializable` or `Parcelable`
+     */
     @Override
-    public int describeContents() {
-        return 0;
+    public void writeToParcel(Parcel destination, int flags) {
+        destination.writeString(firstName);
+        destination.writeString(lastName);
+        // Object in the list must implement either `Serializable` or `Parcelable`
+        destination.writeList(subDatas);
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(firstName);
-        dest.writeString(lastName);
-        dest.writeInt(age);
-        dest.writeList(subDatas);
+    public int describeContents() {
+        return 0;
     }
 
 }

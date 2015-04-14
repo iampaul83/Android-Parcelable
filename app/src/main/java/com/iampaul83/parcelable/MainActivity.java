@@ -7,7 +7,10 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-
+/**
+ * Created by iampaul83 on 4/14/15.
+ * @see <a href="https://github.com/iampaul83/Android-Parcelable">GitHub</a>
+ */
 public class MainActivity extends ActionBarActivity {
 
     @Override
@@ -17,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * On click listener
+     * On Click listener
      */
     public void onGoAction(View view) {
         Intent intent = new Intent(this, SecondActivity.class);
@@ -25,6 +28,10 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    /**
+     * Generate some fake datas for test
+     * @return ArrayList of {@link MyData}
+     */
     private ArrayList<MyData> getFakeDatas() {
         MyData fakeData1 = new MyData("Paul", "Tsai", 25,
             new SubData("phone", "0912345678"),
