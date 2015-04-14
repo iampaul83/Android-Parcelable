@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Android-Parcelable by iampaul83</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Android-Parcelable</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/iampaul83/Android-Parcelable" class="btn">View on GitHub</a>
+      <a href="https://github.com/iampaul83/Android-Parcelable/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/iampaul83/Android-Parcelable/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="怎麼把這專案匯入android-studio" class="anchor" href="#%E6%80%8E%E9%BA%BC%E6%8A%8A%E9%80%99%E5%B0%88%E6%A1%88%E5%8C%AF%E5%85%A5android-studio" aria-hidden="true"><span class="octicon octicon-link"></span></a>怎麼把這專案匯入Android Studio</h1>
+
+<hr>
+
+<h1>
+<a id="透過intent傳遞物件" class="anchor" href="#%E9%80%8F%E9%81%8Eintent%E5%82%B3%E9%81%9E%E7%89%A9%E4%BB%B6" aria-hidden="true"><span class="octicon octicon-link"></span></a>透過Intent傳遞物件</h1>
+
+<ul>
+<li>
+<strong>Primitive data type</strong>: byte, byte[], int, int[], double, String...</li>
+<li><strong>Serializable</strong></li>
+<li><strong>Parcelable</strong></li>
+</ul>
+
+<hr>
+
+<h1>
+<a id="serializable-vs-parcelable-比較" class="anchor" href="#serializable-vs-parcelable-%E6%AF%94%E8%BC%83" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://www.developerphil.com/parcelable-vs-serializable/" target="_blank">Serializable vs Parcelable 比較</a>
+</h1>
+
+<ul>
+<li>
+<strong><em>Serializable</em></strong>只要把class加上<strong><code>implements Serializable</code></strong>就結束了</li>
+<li>
+<strong><em>Parcelable</em></strong>的執行效率比較快，實作稍微複雜</li>
+</ul>
+
+<hr>
+
+<h1>
+<a id="實作parcelable-interface" class="anchor" href="#%E5%AF%A6%E4%BD%9Cparcelable-interface" aria-hidden="true"><span class="octicon octicon-link"></span></a>實作Parcelable interface</h1>
+
+<ul>
+<li>在<code>writeToParcel(Parcel, int)</code>內將資料寫入<strong><code>Parcel</code></strong>
+</li>
+</ul>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">MyData</span> <span class="pl-k">implements</span> <span class="pl-e">Parcelable</span> {
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> firstName;
+    <span class="pl-k">private</span> <span class="pl-smi">String</span> lastName;
+
+    <span class="pl-k">@Override</span>
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">describeContents</span>() {
+        <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+    }
+
+    <span class="pl-k">@Override</span>
+    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">writeToParcel</span>(<span class="pl-smi">Parcel</span> <span class="pl-v">destination</span>, <span class="pl-k">int</span> <span class="pl-v">flags</span>) {
+        destination<span class="pl-k">.</span>writeString(firstName);
+        destination<span class="pl-k">.</span>writeString(lastName);
+    }
+}</pre></div>
+
+<ul>
+<li>必須有個<strong>CREATOR</strong><em>（而且變數名稱跟大小寫都要一樣）</em>，在傳遞Parcel後會利用<strong>CREATOR</strong>建構物件</li>
+<li>注意下面利用兩次<code>readString()</code>依序取出String，順序要和<code>writeString(String)</code>的一樣喔～</li>
+</ul>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">Creator&lt;<span class="pl-smi">MyData</span>&gt;</span> <span class="pl-c1">CREATOR</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">Creator&lt;<span class="pl-smi">MyData</span>&gt;</span>() {
+    <span class="pl-k">@Override</span> <span class="pl-k">public</span> <span class="pl-smi">MyData</span> <span class="pl-en">createFromParcel</span>(<span class="pl-smi">Parcel</span> <span class="pl-v">source</span>) { <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">MyData</span>(source); }
+    <span class="pl-k">@Override</span> <span class="pl-k">public</span> <span class="pl-k">MyData</span>[] <span class="pl-en">newArray</span>(<span class="pl-k">int</span> <span class="pl-v">size</span>) { <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-smi">MyData</span>[size]; }
+};
+
+<span class="pl-k">private</span> MyData(<span class="pl-smi">Parcel</span> source) {
+    firstName <span class="pl-k">=</span> source<span class="pl-k">.</span>readString();
+    lastName <span class="pl-k">=</span> source<span class="pl-k">.</span>readString();
+}</pre></div>
+
+<hr>
+
+<h1>
+<a id="以上是實作一個簡單的parcelable在範例程式裡面還有一些其他方法運用" class="anchor" href="#%E4%BB%A5%E4%B8%8A%E6%98%AF%E5%AF%A6%E4%BD%9C%E4%B8%80%E5%80%8B%E7%B0%A1%E5%96%AE%E7%9A%84parcelable%E5%9C%A8%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F%E8%A3%A1%E9%9D%A2%E9%82%84%E6%9C%89%E4%B8%80%E4%BA%9B%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95%E9%81%8B%E7%94%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>以上是實作一個簡單的Parcelable，在範例程式裡面還有一些其他方法運用：</h1>
+
+<ul>
+<li>
+<code>writeTypedList(List&lt;T&gt;)</code>、<code>readTypedList(List&lt;T&gt;, Creator&lt;T&gt;)</code>
+</li>
+<li>
+<strong>Activity</strong>裡有把Parcelable放進intent的方式</li>
+</ul>
+
+<hr>
+
+<h1>
+<a id="參考連結" class="anchor" href="#%E5%8F%83%E8%80%83%E9%80%A3%E7%B5%90" aria-hidden="true"><span class="octicon octicon-link"></span></a>參考連結</h1>
+
+<p><a href="http://developer.android.com/reference/android/os/Parcelable.html">http://developer.android.com/reference/android/os/Parcelable.html</a>
+<a href="http://www.developerphil.com/parcelable-vs-serializable/">http://www.developerphil.com/parcelable-vs-serializable/</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/iampaul83/Android-Parcelable">Android-Parcelable</a> is maintained by <a href="https://github.com/iampaul83">iampaul83</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
