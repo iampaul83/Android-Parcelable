@@ -1,7 +1,9 @@
 # Android-Parcelable
-***
 #怎麼把這專案匯入Android Studio
+* 要選**Import Project...**
 
+<img src="https://raw.githubusercontent.com/iampaul83/Android-Parcelable/gh-pages/img-as.png" alt="Android Studio 匯入專案" height="200" width="200">
+<!--![Android Studio 匯入專案](https://raw.githubusercontent.com/iampaul83/Android-Parcelable/gh-pages/img-as.png)-->
 ***
 # 透過Intent傳遞物件
 * **Primitive data type**: byte, byte[], int, int[], double, String...
