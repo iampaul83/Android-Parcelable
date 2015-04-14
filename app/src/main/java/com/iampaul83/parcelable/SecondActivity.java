@@ -3,6 +3,7 @@ package com.iampaul83.parcelable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,8 @@ public class SecondActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         ArrayList<MyData> datas = getIntent().getParcelableArrayListExtra("data");
-        Log.i("datas", "datas => " + datas.toString());
+        Log.v("datas", datas.toString());
+        ((TextView) findViewById(R.id.textView)).setText(datas.toString());
     }
 
 }
