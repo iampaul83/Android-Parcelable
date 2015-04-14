@@ -45,9 +45,9 @@ public class SubData implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(type);
-        dest.writeString(value);
+    public void writeToParcel(Parcel destination, int flags) {
+        destination.writeString(type);
+        destination.writeString(value);
     }
 
 }
