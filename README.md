@@ -4,10 +4,12 @@
 
 <img src="https://raw.githubusercontent.com/iampaul83/Android-Parcelable/gh-pages/img-as.png" alt="Android Studio 匯入專案" height="200" width="200">
 ***
-# 透過Intent傳遞物件
-* **Primitive data type**: byte, byte[], int, int[], double, String...
-* **Serializable**
-* **Parcelable**
+# 透過Intent傳遞資料
+* 可傳遞的data type
+  * **Primitive data type**: byte, byte[], int, int[], double, String...
+  * **Serializable**
+  * **Parcelable**
+* 如果想傳一個自定類別的物件，該類別就得實作*Serializable*或*Parcelable*，本篇實作*Parcelable interface*
 
 ***
 # <a href="http://www.developerphil.com/parcelable-vs-serializable/" target="_blank">Serializable vs Parcelable 比較</a>
